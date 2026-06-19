@@ -15,3 +15,10 @@ kaggle.json
 
 # Sistema
 .DS_Store
+
+# Configuración local de la herramienta
+.claude/
+
+# Presentación: subir solo el PDF (no el .tex, estilos, guión ni temporales)
+presentacion/*
+!presentacion/presentacion.pdf
