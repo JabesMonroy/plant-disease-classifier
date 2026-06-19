@@ -115,4 +115,8 @@ Gráficas generadas durante el entrenamiento (en `artifacts/`):
 
 ## Hugging Face Space
 
-_Pendiente: enlace al Space desplegado._
+Demo interactiva desplegada (modelo ExecuTorch + Gradio):
+
+**https://huggingface.co/spaces/jabesmonroy/plant-disease-classifier**
+
+Sube la foto de una hoja y el Space devuelve las 3 clases más probables con su confianza.
