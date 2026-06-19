@@ -120,3 +120,16 @@ Demo interactiva desplegada (modelo ExecuTorch + Gradio):
 **https://huggingface.co/spaces/jabesmonroy/plant-disease-classifier**
 
 Sube la foto de una hoja y el Space devuelve las 3 clases más probables con su confianza.
+
+## Referencias
+
+- Mohanty, S. P., Hughes, D. P., & Salathé, M. (2016). *Using Deep Learning for Image-Based
+  Plant Disease Detection.* Frontiers in Plant Science, 7, 1419.
+- Hughes, D. P., & Salathé, M. (2015). *An open access repository of images on plant health
+  to enable the development of mobile disease diagnostics* (PlantVillage). arXiv:1511.08060.
+- Sandler, M., Howard, A., Zhu, M., Zhmoginov, A., & Chen, L. C. (2018). *MobileNetV2:
+  Inverted Residuals and Linear Bottlenecks.* CVPR.
+- Szegedy, C., Vanhoucke, V., Ioffe, S., Shlens, J., & Wojna, Z. (2016). *Rethinking the
+  Inception Architecture for Computer Vision* (label smoothing). CVPR.
+- Deng, J., et al. (2009). *ImageNet: A Large-Scale Hierarchical Image Database.* CVPR.
+- PyTorch Edge. *ExecuTorch Documentation.* https://pytorch.org/executorch
