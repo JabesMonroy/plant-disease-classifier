@@ -98,8 +98,20 @@ carga el `.pte` con el runtime de ExecuTorch y permite subir una imagen para inf
 
 ## Resultados
 
-_Pendiente: se completará con los valores reales de test (accuracy y Macro-F1) y las
-gráficas tras el entrenamiento._
+Entrenamiento de 10 épocas (MobileNetV2 con *transfer learning*) sobre PlantVillage (38 clases).
+Desempeño sobre el conjunto de prueba independiente:
+
+| Métrica | Valor |
+|---|---|
+| Accuracy (test) | 0.9939 |
+| Macro-F1 (test) | 0.9915 |
+| Accuracy de validación (mejor época) | 0.9930 |
+
+Gráficas generadas durante el entrenamiento (en `artifacts/`):
+
+- `curva_perdida.png` — disminución de la pérdida (entrenamiento y validación).
+- `curva_accuracy.png` — progreso del accuracy (entrenamiento y validación).
+- `matriz_confusion.png` — matriz de confusión sobre el conjunto de prueba.
 
 ## Hugging Face Space
 
