@@ -38,15 +38,13 @@ def export_to_executorch(model, img_size, output_path):
 
 def verify(model, pte_path, example_inputs):
     """Compara la predicción del modelo original con la del .pte exportado."""
-    from executorch.runtime import Runtime
+    from executorch.extension.pybindings.portable_lib import _load_for_executorch
 
     with torch.no_grad():
         eager_out = model(*example_inputs)
 
-    runtime = Runtime.get()
-    program = runtime.load_program(pte_path)
-    method = program.load_method("forward")
-    et_out = method.execute(list(example_inputs))[0]
+    et_module = _load_for_executorch(pte_path)
+    et_out = et_module.forward(list(example_inputs))[0]
 
     eager_cls = int(eager_out.argmax(1))
     et_cls = int(et_out.argmax(1))

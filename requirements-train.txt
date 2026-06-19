@@ -1,8 +1,8 @@
 # Entrenamiento (Google Colab / local con GPU)
 # Las versiones de torch/torchvision se fijan para que el modelo exportado
 # con ExecuTorch sea compatible con el Hugging Face Space.
-torch==2.5.1
-torchvision==0.20.1
+torch==2.5.0
+torchvision==0.20.0
 scikit-learn==1.5.2
 matplotlib==3.9.2
 pillow==11.0.0

@@ -17,10 +17,13 @@ el Space. Una diferencia de versión es la causa más común de que el modelo ca
 pero falle en el despliegue. Las versiones usadas en este proyecto son:
 
 ```
-torch==2.5.1
-torchvision==0.20.1
+torch==2.5.0
+torchvision==0.20.0
 executorch==0.4.0
 ```
+
+> `executorch==0.4.0` fija de forma exacta `torch==2.5.0` y `torchvision==0.20.0`; usar otra
+> versión de torch (por ejemplo 2.5.1) provoca un conflicto de dependencias en pip.
 
 Estas mismas versiones aparecen en `space/requirements.txt`.
 
