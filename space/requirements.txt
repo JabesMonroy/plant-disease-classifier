@@ -3,5 +3,4 @@
 executorch==0.4.0
 torch==2.5.0
 torchvision==0.20.0
-pillow==11.0.0
 gradio==4.44.0
