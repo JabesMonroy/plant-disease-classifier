@@ -1,0 +1,17 @@
+# Datos y artefactos pesados
+data/
+*.pt
+*.pth
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Entorno
+.venv/
+.env
+kaggle.json
+
+# Sistema
+.DS_Store
