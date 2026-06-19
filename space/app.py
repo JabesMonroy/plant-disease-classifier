@@ -5,6 +5,7 @@ import glob
 
 import torch
 import gradio as gr
+from PIL import Image
 from torchvision import transforms
 from executorch.extension.pybindings.portable_lib import _load_for_executorch
 
@@ -25,24 +26,50 @@ transform = transforms.Compose([
 _model = _load_for_executorch("model.pte")
 
 
-def predict(image):
-    """Predice la clase de la hoja y devuelve las probabilidades por clase."""
+def _probabilities(image):
+    """Devuelve el vector de probabilidades para una imagen PIL."""
     tensor = transform(image.convert("RGB")).unsqueeze(0)
     logits = _model.forward([tensor])[0]
-    probs = torch.softmax(logits, dim=1)[0]
+    return torch.softmax(logits, dim=1)[0]
+
+
+def predict(image):
+    """Clasifica una imagen y devuelve las probabilidades por clase."""
+    probs = _probabilities(image)
     return {CLASSES[i]: float(probs[i]) for i in range(len(CLASSES))}
+
+
+def predict_batch(paths):
+    """Clasifica varias imágenes y devuelve una galería con la clase predicha."""
+    galeria = []
+    for path in paths:
+        probs = _probabilities(Image.open(path))
+        idx = int(probs.argmax())
+        galeria.append((path, f"{CLASSES[idx]} ({probs[idx] * 100:.1f}%)"))
+    return galeria
 
 
 examples = sorted(glob.glob("examples/*"))
 
-demo = gr.Interface(
+una_imagen = gr.Interface(
     fn=predict,
     inputs=gr.Image(type="pil", label="Imagen de la hoja"),
     outputs=gr.Label(num_top_classes=3, label="Predicción"),
-    title="Clasificador de enfermedades en plantas",
-    description="Sube la foto de una hoja para identificar su estado de salud "
-                "(dataset PlantVillage, 38 clases). Modelo MobileNetV2 exportado con ExecuTorch.",
     examples=examples or None,
+    description="Sube la foto de una hoja para identificar su estado de salud.",
+)
+
+varias_imagenes = gr.Interface(
+    fn=predict_batch,
+    inputs=gr.File(file_count="multiple", type="filepath", label="Imágenes de hojas"),
+    outputs=gr.Gallery(label="Predicciones", columns=4),
+    description="Sube varias imágenes a la vez para clasificarlas todas.",
+)
+
+demo = gr.TabbedInterface(
+    [una_imagen, varias_imagenes],
+    ["Una imagen", "Varias imágenes"],
+    title="Clasificador de enfermedades en plantas (PlantVillage, 38 clases)",
 )
 
 if __name__ == "__main__":
